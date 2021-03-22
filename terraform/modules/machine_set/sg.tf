@@ -1,9 +1,10 @@
 #
 # Security Groups
 #
-resource "aws_security_group" "bastion_allow_ssh" {
-  vpc_id      = aws_vpc.testytesty_vpc.id
-  name        = "bastion-allow-ssh"
+# TODO: Connect from bastion; or from machines in same set
+resource "aws_security_group" "set_allow_ssh" {
+  vpc_id      = var.network_layer.vpc_id
+  name        = "${var.set.name}-allow-ssh"
   description = "security group that allows ssh and all egress traffic"
   egress {
     from_port   = 0

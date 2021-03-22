@@ -32,12 +32,37 @@ To connect to the Bastion:
 ssh -i ssh-cloud-private-dns.pem ec2-user@...public-ip-of-bastion
 ```
 
+## To connect to the EC2 Instances in the private Subnet
+NOTE: This section is just to smoke test while developing. This puts the private key on the Bastion (not smart!). See the "towardsdatascience" link below for how to set up SSH with ProxyCommand to proxy SSH commands through the Bastion into the instances on the Private Subnet without putting the private key on the Bastion. 
+
+Convert the 'pem' to base64, from PowerShell:
+
+```
+$theFilePath = "$($pwd)\ssh-cloud-private-dns.pem"
+$e = [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(([System.IO.File]::ReadAllText($theFilePath) -replace '\r', '')))
+scb $e
+```
+
+To place the private key on the Bastion, connect using AWS and then:
+
+```
+echo "paste the content of scb above" | base64 --decode > ssh-cloud-private-dns.pem
+chmod 600 ssh-cloud-private-dns.pem
+```
+
+To SSH from the Bastion to the Vm Server running in (say) set 1:
+
+```
+ssh -i ./ssh-cloud-private-dns.pem ec2-user@set1-server.testytesty.com
+```
+
 # Design Considerations
 There are a number of constraints here:
 
 1. The networking is hard coded and a bit hackey-wackey for now. 
 2. SSH is used to communicate between private EC2 Instances and the Bastion (same keypair)
 3. I have created a module out of the 'network layer'; the network layer exports (as a map) all of its context. This is not so much a reusable module as an abstraction for this use case. 
+4. This uses private fixed IPs for now: I will update this in future to use DHCP Options and other approaches. 
 
 # References
 | Link | Description |
