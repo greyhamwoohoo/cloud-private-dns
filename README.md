@@ -12,7 +12,7 @@ The EC2 instances are grouped as 'sets' (each set has a server and client). The 
 # Development
 
 ## To create the Public / Private KeyPair
-Run the following from the 'terraform' folder to generate the public / private key pair:
+Run the following from the 'aws-terraform' folder to generate the public / private key pair:
 
 ```bash
 ssh-keygen.exe -b 2048 -t rsa -f ./ssh-cloud-private-dns -N '""' -m PEM -C "private-key"
