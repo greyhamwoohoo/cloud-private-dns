@@ -53,7 +53,7 @@ chmod 600 ssh-cloud-private-dns.pem
 To SSH from the Bastion to the Vm Client running in (say) set 1:
 
 ```
-ssh -i ./ssh-cloud-private-dns.pem ec2-user@set1-client.testytesty.com
+ssh -i ./ssh-cloud-private-dns.pem ec2-user@set1-client.testytesty.internal
 ```
 
 You can only SSH from the client to other servers in the same 'set'. 

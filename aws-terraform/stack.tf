@@ -2,6 +2,7 @@ module "network_layer" {
   source = "./modules/network_layer"
 
   bastion_key_pair_name = aws_key_pair.key_pair_for_everything.key_name
+  private_domain_name = "testytesty.internal"
 }
 
 # TODO: use DHCP Options in future

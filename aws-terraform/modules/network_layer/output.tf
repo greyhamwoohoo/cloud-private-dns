@@ -7,5 +7,6 @@ output "network_layer" {
         bastion_public_ip = aws_instance.bastion_linux.public_ip
         bastion_security_group_id = aws_security_group.bastion_allow_ssh.id
         private_hosted_zone_id = aws_route53_zone.private_zone.id
+        private_domain_name = aws_route53_zone.private_zone.name
     }
 }
